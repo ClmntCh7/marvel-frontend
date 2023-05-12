@@ -1,0 +1,209 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: #f2ebe8;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.container {
+  margin: 0 auto;
+}
+
+header {
+  border-bottom: 1px solid black;
+  height: 150px;
+  padding: 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header > div {
+  flex: 1;
+}
+
+.Header-logo-block {
+  height: 50px;
+  /* border: 2px solid red */
+}
+
+.Header-logo-block img {
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+header button {
+  border-bottom: 3px solid red;
+  padding-bottom: 5px;
+}
+
+.Header-buttons-block {
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+  /* border: 2px solid red; */
+}
+.Header-middleNav-buttons {
+  /* border: 2px solid red */
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.Header-leftNav-buttons {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: end;
+}
+
+.Home-characterCard-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0 30px;
+  width: 100vw;
+}
+
+.cut-corner {
+  clip-path: polygon(
+    0 26px,
+    26px 0,
+    100% 0,
+    100% calc(100% - 26px),
+    calc(100% - 26px) 100%,
+    0 100%
+  );
+}
+
+.Card-container {
+  /* background-color: #1a2d3b; */
+  margin: 20px 0px;
+  height: 250px;
+  width: 160px;
+  position: relative;
+}
+
+.Card-container img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 0;
+  /* border: 2px solid blue; */
+}
+
+.Card-wrapper {
+  display: flex;
+  border: 1px solid red;
+  position: relative;
+}
+
+.Card-details-wrapper {
+  color: white;
+  flex: 1;
+}
+
+.Card-container-large {
+  /* background-color: #1a2d3b; */
+  margin: 20px 0px;
+  height: fit-content;
+  width: 630px;
+  position: relative;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.Card-background {
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  filter: blur(80px);
+}
+.Card-comics-container {
+  display: flex;
+  justify-content: space-around;
+  border: 1px orange solid;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.Card-comics {
+  margin-bottom: 20px;
+  border: 1px red solid;
+}
+
+.Card-comics img {
+  object-fit: cover;
+}
+
+.Pagination {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+}
+.pagination-button {
+  clip-path: polygon(
+    0 5px,
+    7px 0,
+    100% 0,
+    100% calc(100% - 7px),
+    calc(100% - 7px) 100%,
+    0 100%
+  );
+  background-color: #9f2c1a;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f2ebe8;
+}
+
+.Home-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Searchbar-wraper {
+  margin: 30px 0;
+  width: 50vw;
+}
+
+.Searchbar-wraper input {
+  width: 100%;
+  height: 40px;
+  border-radius: 30px;
+  padding: 0 20px;
+}
+
+.Favorite-buttonBlock button {
+  height: 20px;
+}
+
+.Favorite-button button {
+  height: 20px;
+}
+
+.Favorite-RemoveButton {
+  background-color: red;
+}
+.Favorite-AddButton {
+  background-color: yellowgreen;
+}
