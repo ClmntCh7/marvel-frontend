@@ -22,7 +22,8 @@ const Home = ({
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/characters?name=${search}&${
+          `https://site--marvel-backend--m4snx7ydrpgs.code.run/characters?name=${search}&${
+            // `http://localhost:3000/characters?name=${search}&${
             pageToSkip ? pageToSkip : ""
           }`
         );
@@ -50,7 +51,7 @@ const Home = ({
     getData();
   }, [pageToSkip, search, myFavorites]);
   useEffect(() => {
-    const favorite = JSON.parse(localStorage.getItem("favorites")) || null;
+    const favorite = JSON.parse(localStorage.getItem("favorites")) || [];
     setMyFavorites(favorite);
   }, [setMyFavorites]);
 

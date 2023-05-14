@@ -16,7 +16,8 @@ const Comics = ({ search, setSearch, myFavorites, setMyFavorites }) => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comics?title=${search}&${
+          `https://site--marvel-backend--m4snx7ydrpgs.code.run/comics?title=${search}&${
+            // `http://localhost:3000/comics?title=${search}&${
             pageToSkip ? pageToSkip : ""
           }`
         );
@@ -37,18 +38,15 @@ const Comics = ({ search, setSearch, myFavorites, setMyFavorites }) => {
 
         setdata(results);
         setIsLoading(false);
-        // const { _id, name, description, thumbnail } = results;
-
-        // console.log(data);
       } catch (error) {
         console.log(error.message);
       }
     };
     getData();
-  }, [pageToSkip, search]);
+  }, [pageToSkip, search, myFavorites]);
 
   // console.log(location);
-  location.state = { elemType: "character" };
+  location.state = { elemType: "comic" };
 
   return isLoading ? (
     <p>Loading ...</p>

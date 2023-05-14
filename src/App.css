@@ -12,6 +12,9 @@ body {
 .container {
   margin: 0 auto;
 }
+h2 {
+  font-size: 20px;
+}
 
 header {
   border-bottom: 1px solid black;
@@ -206,4 +209,18 @@ header button {
 }
 .Favorite-AddButton {
   background-color: yellowgreen;
+}
+
+.Favorite-wrapper {
+  display: flex;
+  /* background-color: red; */
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.Favorite-container {
+  /* background-color: green; */
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }

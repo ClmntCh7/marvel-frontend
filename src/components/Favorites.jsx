@@ -4,9 +4,9 @@ const Favorites = ({ myFavorites, setMyFavorites, id, type, elem }) => {
       return elem._id === id || null;
     });
     if (!findFavorite) {
+      elem.type = type;
       console.log("isPushed");
       const newFavorites = [...myFavorites];
-      newFavorites.isFavorite = !elem.isFavorite;
       newFavorites.push(elem);
       setMyFavorites(newFavorites);
       localStorage.setItem("favorites", JSON.stringify(newFavorites));

@@ -17,7 +17,7 @@ const CharacterCard = ({
   }, [myFavorites]);
 
   useEffect(() => {
-    const favorite = JSON.parse(localStorage.getItem("favorites")) || null;
+    const favorite = JSON.parse(localStorage.getItem("favorites")) || [];
     setMyFavorites(favorite);
   }, [setMyFavorites]);
 
@@ -28,7 +28,7 @@ const CharacterCard = ({
 
   return (
     <div>
-      <Link to={`/characters/${id}`}>
+      <Link to={`/character/${id}`}>
         <article className="Card-container cut-corner">
           <img
             src={`${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`}

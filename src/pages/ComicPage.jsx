@@ -12,7 +12,8 @@ const ComicPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/comic/${comicId}`
+          `https://site--marvel-backend--m4snx7ydrpgs.code.run/comic/${comicId}`
+          // `http://localhost:3000/comic/${comicId}`
         );
 
         console.log(response);

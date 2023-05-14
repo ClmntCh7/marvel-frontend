@@ -1,60 +1,74 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const MyFavorites = ({ myFavorites, setMyFavorites }) => {
-  const [comicsData, setComicsData] = useState();
-  const [charData, setCharData] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const favorite = localStorage.getItem("favorites");
-    if (favorite) {
-      setMyFavorites(JSON.parse(favorite));
-    }
+    localStorage.setItem("favorites", JSON.stringify(myFavorites));
+  }, [myFavorites]);
 
-    // const getComics = async () => {
-    //   try {
-    //     const response = await axios.get(`http://localhost:3000/comic/${elem}`);
-    //     return console.log(response);
-    //     // const foundcomics = [...comicsData];
-    //     // setComicsData(response.data);
-    //     setIsLoading(false);
-    //   } catch (error) {
-    //     console.log(error.message);
-    //   }
-    // };
+  useEffect(() => {
+    const favorite = JSON.parse(localStorage.getItem("favorites")) || [];
+    setMyFavorites(favorite);
+    setIsLoading(false);
   }, [setMyFavorites]);
 
   return isLoading ? (
     <p>Loading ...</p>
-  ) : (
-    <div>
-      {/* <Link to={`/character/${id}`}>
-        <article className="Card-container cut-corner">
-          <img
-            src={`${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`}
-            alt=""
-          />
-          <div className="Card-details">
-            <span>{name}</span>
-            <span>{description}</span>
-          </div>
-        </article>
-      </Link>
-      <Link to={`/comic/${id}`}>
-        <article className="Card-container cut-corner">
-          <img
-            src={`${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`}
-            alt=""
-          />
-          <div className="Card-details">
-            <span>{name}</span>
-            <span>{description}</span>
-          </div>
-        </article>
-      </Link> */}
+  ) : myFavorites.length > 0 ? (
+    <div className="Favorite-wrapper">
+      <h2>Favorite comics</h2>
+      <div className="Favorite-container">
+        {myFavorites.map((elem) => {
+          if (elem.type === "character") {
+            return (
+              <div key={elem._id}>
+                <Link to={`/character/${elem._id}`}>
+                  <article className="Card-container cut-corner">
+                    <img
+                      src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
+                      alt=""
+                    />
+                    <div className="Card-details">
+                      <span>{elem.name}</span>
+                      <span>{elem.description}</span>
+                    </div>
+                  </article>
+                </Link>
+              </div>
+            );
+          }
+        })}
+      </div>
+      <div>
+        <h2>Favorite comics</h2>
+        <div className="Favorite-container">
+          {myFavorites.map((elem) => {
+            if (elem.type === "comic") {
+              return (
+                <div key={elem._id}>
+                  <Link to={`/comic/${elem.id}`}>
+                    <article className="Card-container cut-corner">
+                      <img
+                        src={`${elem.thumbnail.path}/portrait_uncanny.${elem.thumbnail.extension}`}
+                        alt=""
+                      />
+                      <div className="Card-details">
+                        <span>{elem.title}</span>
+                        <span>{elem.description}</span>
+                      </div>
+                    </article>
+                  </Link>
+                </div>
+              );
+            }
+          })}
+        </div>
+      </div>
     </div>
+  ) : (
+    <span>pas de fav</span>
   );
 };
 
