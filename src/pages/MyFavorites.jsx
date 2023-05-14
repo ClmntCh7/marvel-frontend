@@ -18,8 +18,8 @@ const MyFavorites = ({ myFavorites, setMyFavorites }) => {
     <p>Loading ...</p>
   ) : myFavorites.length > 0 ? (
     <div className="Favorite-wrapper">
-      <h2>Favorite comics</h2>
-      <div className="Favorite-container">
+      <h2>Favorite Characters</h2>
+      <div className="Home-characterCard-wrapper">
         {myFavorites.map((elem) => {
           if (elem.type === "character") {
             return (
@@ -42,8 +42,8 @@ const MyFavorites = ({ myFavorites, setMyFavorites }) => {
         })}
       </div>
       <div>
-        <h2>Favorite comics</h2>
-        <div className="Favorite-container">
+        <h2>Favorite Comics</h2>
+        <div className="Home-characterCard-wrapper">
           {myFavorites.map((elem) => {
             if (elem.type === "comic") {
               return (

@@ -12,7 +12,7 @@ const CharacterPage = () => {
     const getData = async () => {
       try {
         const response = await axios.get(
-          `https://site--marvel-backend--m4snx7ydrpgs.code.run//comics/${characterId}`
+          `https://site--marvel-backend--m4snx7ydrpgs.code.run/comics/${characterId}`
           // `http://localhost:3000/comics/${characterId}`
         );
         console.log(data);
