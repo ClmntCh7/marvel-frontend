@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // Components
 import Header from "./components/Header";
@@ -11,10 +11,10 @@ import Home from "./pages/Home";
 import Comics from "./pages/Comics";
 import CharacterPage from "./pages/CharacterPage";
 import ComicPage from "./pages/ComicPage";
+import MyFavorites from "./pages/MyFavorites";
 
 const App = () => {
   const [search, setSearch] = useState("");
-  // const [isFavorite, setIsFavorite] = useState(false);
   const [myFavorites, setMyFavorites] = useState([]);
 
   return (
@@ -27,8 +27,6 @@ const App = () => {
             <Home
               search={search}
               setSearch={setSearch}
-              // isFavorite={isFavorite}
-              // setIsFavorite={setIsFavorite}
               myFavorites={myFavorites}
               setMyFavorites={setMyFavorites}
             />
@@ -46,10 +44,21 @@ const App = () => {
             />
           }
         />
-        <Route path="/characters/:characterId" element={<CharacterPage />} />
+        <Route
+          path="/my-favorites"
+          element={
+            <MyFavorites
+              myFavorites={myFavorites}
+              setMyFavorites={setMyFavorites}
+            />
+          }
+        />
+
+        <Route path="/character/:characterId" element={<CharacterPage />} />
         <Route path="/comics/:characterId" element={<CharacterPage />} />
         <Route path="/comic/:comicId" element={<ComicPage />} />
       </Routes>
+
       {/* <Modals /> */}
     </Router>
   );

@@ -1,81 +1,45 @@
-import { useState } from "react";
-
-const handleFavorites = ({
-  isFavorite,
-  setIsFavorite,
-  myFavorites,
-  setMyFavorites,
-  id,
-  type,
-}) => {
-  const findFavorite = myFavorites.find((elem) => {
-    return elem?.id === id;
+const Favorites = ({ myFavorites, setMyFavorites, id, type, elem }) => {
+  const handleFavorites = ({ id, type, elem }) => {
+    const findFavorite = myFavorites.find((elem) => {
+      return elem._id === id || null;
+    });
+    if (!findFavorite) {
+      console.log("isPushed");
+      const newFavorites = [...myFavorites];
+      newFavorites.isFavorite = !elem.isFavorite;
+      newFavorites.push(elem);
+      setMyFavorites(newFavorites);
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    } else {
+      console.log("is Removed");
+      const newFavorites = [...myFavorites];
+      const index = newFavorites.indexOf(findFavorite);
+      newFavorites.splice(index, 1);
+      setMyFavorites(newFavorites);
+      localStorage.setItem("favorites", JSON.stringify(newFavorites));
+    }
+  };
+  const isFavorite = myFavorites.some((elem) => {
+    return elem._id === id;
   });
-  if (!findFavorite) {
-    console.log("isPushed");
-    const newFavorites = [...myFavorites];
-    setIsFavorite(true);
-    newFavorites.push({ id: id, isFavorite: isFavorite, type: type });
-    setMyFavorites(newFavorites);
-    localStorage.setItem("Favorites", JSON.stringify(newFavorites));
-  } else {
-    console.log("is Removed");
-    setIsFavorite(false);
-    const newFavorites = [...myFavorites];
-    const index = newFavorites.indexOf(findFavorite);
-    newFavorites.splice(index, 1);
-    setMyFavorites(newFavorites);
-    localStorage.setItem("Favorites", JSON.stringify(newFavorites));
-  }
-};
 
-const Favorites = ({
-  isFavorite,
-  setIsFavorite,
-  myFavorites,
-  setMyFavorites,
-  id,
-  type,
-  elem,
-}) => {
-  //   console.log(myFavorites.find(elem));
   return (
     <div className="Favorite-buttonBlock">
-      {!isFavorite ? (
-        <button
-          className="Favorite-AddButton"
-          onClick={() => {
-            handleFavorites({
-              isFavorite,
-              setIsFavorite,
-              myFavorites,
-              setMyFavorites,
-              id,
-              type,
-            });
-          }}
-          value={isFavorite}
-        >
-          Add favory
-        </button>
-      ) : (
-        <button
-          className="Favorite-RemoveButton"
-          onClick={() => {
-            handleFavorites({
-              isFavorite,
-              setIsFavorite,
-              myFavorites,
-              setMyFavorites,
-              id,
-              type,
-            });
-          }}
-          value={isFavorite}
-        >
-          Remove favory
-        </button>
-      )}
+      <button
+        className={isFavorite ? "Favorite-RemoveButton" : "Favorite-AddButton"}
+        onClick={() => {
+          handleFavorites({
+            myFavorites,
+            setMyFavorites,
+            id,
+            type,
+            elem,
+          });
+        }}
+        value={isFavorite}
+      >
+        {isFavorite ? "Remove favory" : "Add favory"}
+      </button>
     </div>
   );
 };

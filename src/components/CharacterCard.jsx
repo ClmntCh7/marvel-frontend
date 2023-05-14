@@ -1,24 +1,30 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import Favorites from "./Favorites";
 
 const CharacterCard = ({
+  elem,
   id,
   name,
   thumbnail,
   description,
-  setCharacterId,
-  // isFavorite,
-  // setIsFavorite,
   myFavorites,
   setMyFavorites,
   type,
-  elem,
 }) => {
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(myFavorites));
+  }, [myFavorites]);
+
+  useEffect(() => {
+    const favorite = JSON.parse(localStorage.getItem("favorites")) || null;
+    setMyFavorites(favorite);
+  }, [setMyFavorites]);
+
+  // }, [setMyFavorites]);
   // const pictureURLBuilder = () => {
   //   return "";
   // };
-  const [isFavorite, setIsFavorite] = useState(false);
 
   return (
     <div>
@@ -34,9 +40,8 @@ const CharacterCard = ({
           </div>
         </article>
       </Link>
+
       <Favorites
-        isFavorite={isFavorite}
-        setIsFavorite={setIsFavorite}
         id={id}
         type={type}
         myFavorites={myFavorites}

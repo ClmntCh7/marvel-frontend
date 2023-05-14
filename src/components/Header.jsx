@@ -22,8 +22,8 @@ const Header = () => {
         </div>
       </div>
       <div className="Header-leftNav-buttons">
-        <Link to="/comics">
-          <button>Favorites</button>
+        <Link to="/my-favorites">
+          <button>My Favorites</button>
         </Link>
       </div>
     </header>

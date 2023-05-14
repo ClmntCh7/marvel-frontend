@@ -9,8 +9,6 @@ const Home = ({
   setCharacterId,
   search,
   setSearch,
-  // isFavorite,
-  // setIsFavorite,
   myFavorites,
   setMyFavorites,
 }) => {
@@ -32,7 +30,6 @@ const Home = ({
 
         const funcPageNumber = (count) => {
           const pageNumber = Math.ceil(count / 100);
-
           let paginationButtons = [];
           for (let i = 0; i < pageNumber; i++) {
             paginationButtons.push(i + 1);
@@ -40,18 +37,26 @@ const Home = ({
           setpageNumber(paginationButtons);
           return paginationButtons;
         };
+
         funcPageNumber(count);
         setdata(results);
+        localStorage.setItem("favorites", JSON.stringify(myFavorites));
         setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
     };
+
     getData();
-  }, [pageToSkip, search]);
+  }, [pageToSkip, search, myFavorites]);
+  useEffect(() => {
+    const favorite = JSON.parse(localStorage.getItem("favorites")) || null;
+    setMyFavorites(favorite);
+  }, [setMyFavorites]);
+
   // console.log(location);
   location.state = { elemType: "character" };
-  console.log(myFavorites);
+
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
@@ -62,17 +67,15 @@ const Home = ({
           return (
             <div key={elem._id}>
               <CharacterCard
+                elem={elem}
                 id={elem._id}
                 name={elem.name}
                 description={elem.description}
                 thumbnail={elem.thumbnail}
                 setCharacterId={setCharacterId}
-                // isFavorite={isFavorite}
-                // setIsFavorite={setIsFavorite}
                 type={location.state.elemType}
                 myFavorites={myFavorites}
                 setMyFavorites={setMyFavorites}
-                elem={elem}
               />
             </div>
           );

@@ -1,26 +1,49 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import Favorites from "./Favorites";
 
-const ComicsCard = ({ id, name, thumbnail }) => {
+const ComicsCard = ({
+  elem,
+  id,
+  title,
+  thumbnail,
+  description,
+  myFavorites,
+  setMyFavorites,
+  type,
+}) => {
   // const pictureURLBuilder = () => {
   //   return "";
   // };
-  // console.log(thumbnail);
-  // console.log(name);
-  //   console.log(
-  //     `${thumbnail.path}/portrait_fantastic.${thumbnail.extension}`
-  //   );
+  useEffect(() => {
+    const favorite = localStorage.getItem("favorites");
+    if (favorite) {
+      setMyFavorites(JSON.parse(favorite));
+    }
+  }, [setMyFavorites]);
+
   return (
-    <Link to={`/comic/${id}`}>
-      <article className="Card-container">
-        <img
-          src={`${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`}
-          alt=""
-        />
-        {/* <div>
-        <span>{name}</span>
-      </div> */}
-      </article>
-    </Link>
+    <div>
+      <Link to={`/comic/${id}`}>
+        <article className="Card-container cut-corner">
+          <img
+            src={`${thumbnail.path}/portrait_uncanny.${thumbnail.extension}`}
+            alt=""
+          />
+          <div className="Card-details">
+            <span>{title}</span>
+            <span>{description}</span>
+          </div>
+        </article>
+      </Link>
+      <Favorites
+        id={id}
+        type={type}
+        myFavorites={myFavorites}
+        setMyFavorites={setMyFavorites}
+        elem={elem}
+      />
+    </div>
   );
 };
 

@@ -1,14 +1,16 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import ComicsCard from "../components/ComicsCard";
-import axios from "axios";
 import Pagination from "../components/Pagination";
 import Searchbar from "../components/Searchbar";
+import { useLocation } from "react-router";
 
-const Comics = ({ search, setSearch }) => {
+const Comics = ({ search, setSearch, myFavorites, setMyFavorites }) => {
   const [data, setdata] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [pageNumber, setpageNumber] = useState();
   const [pageToSkip, setpageToSkip] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
     const getData = async () => {
@@ -44,7 +46,10 @@ const Comics = ({ search, setSearch }) => {
     };
     getData();
   }, [pageToSkip, search]);
-  console.log(search);
+
+  // console.log(location);
+  location.state = { elemType: "character" };
+
   return isLoading ? (
     <p>Loading ...</p>
   ) : (
@@ -55,10 +60,14 @@ const Comics = ({ search, setSearch }) => {
           return (
             <div key={elem._id}>
               <ComicsCard
+                elem={elem}
                 id={elem._id}
-                name={elem.name}
+                title={elem.title}
                 desciption={elem.description}
                 thumbnail={elem.thumbnail}
+                type={location.state.elemType}
+                myFavorites={myFavorites}
+                setMyFavorites={setMyFavorites}
               />
             </div>
           );
